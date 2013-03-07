@@ -1,0 +1,12 @@
+.form-row th input, select {
+	width:150px;
+}
+
+.form-row th button {
+	width:100px;
+}
+
+.form-labels th {
+	text-align: center;
+}
+

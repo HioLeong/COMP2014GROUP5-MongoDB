@@ -1,0 +1,186 @@
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<link href="css/bootstrap.min.css" rel="stylesheet" media="screen">
+	<title>Form for JSON</title>
+</head>
+
+<body>
+	<div align="center">
+		<table>
+			<tbody id="tableToModify">
+				<tr>
+					<th>Form component</th><th>ID</th><th>Name</th>
+				</tr>
+				<tr id="rowToClone">
+					<form method="POST" action="">
+						<td>
+							<select id="formselect" name="fcomponent" onChange=selectClickChange();>
+								<option value="text-field">Text-field</option>
+								<option value="check-box">Checkbox group</option>
+								<option value="radio-group">Radio group</option>
+								<option value="time-picker">Time picker</option>
+								<option value="date-picker">Date picker</option>
+								<option value="calendar-date-picker">Calendar Date picker</option>
+								<option value="drop-down-list">Drop-down list</option>
+								<option value="signature-box">Signature Box</option>
+								<option value="pictures">Pictures </option>
+								<option value="form">Form</option>
+							</select>
+						</td>
+						<td>
+							<input type="text" name="id">
+						</td>
+						<td>
+							<input type="text" name="name">
+						</td>
+
+
+						<!--fields to be hidden for form components subgroups-->
+
+						<!--TEXT form component-->
+						<td id="text1">
+							<select name="type">
+								<option value="" disabled selected>Type</option>
+								<option value="string">String</option>
+								<option value="int">Integer</option>
+								<option value="real">Real</option>
+								<option value="email">Email</option>
+								<option value="phone_num">Phone number</option>
+							</select>
+						</td>
+						<td id="text2">
+							<input type="text" name="default-text" placeholder="Default-text">
+						</td>
+						<!--CHECKBOX or RADIO_BTN form component - initially hidden -->
+						<td id="check_rad1" style="display:none">
+							<input type="text" name="options" placeholder="Options: [item1, item2..]">
+						</td>
+						<td id="check_rad2" style="display:none">
+							<input type="text" name="default-choice" placeholder="Default-choice(index of elmnt)">
+						</td>
+						<!--TIME PICKER f.c. - i.h.-->
+						<td id="time" style="display:none">
+							<input type="text" name="starting-time" placeholder="Starting time (hh:mm)">
+						</td>
+						<!--DATE PICKER f.c. - i.h.-->
+						<td id="date" style="display:none">
+							<input type="text" name="starting-date" placeholder="Starting date(dd/mm/yyyy)">
+						</td>
+						<!--CALENDAR DATE PICKER f.c. - i.h.-->
+						<td id="calendar" style="display:none">
+							<input type="text" name="starting-month" placeholder="Starting Month(e.g. July)">
+						</td>
+						<!--SIGNATURE BOX && PICTURES f.c. - i.h.-->
+						<td id="devel" style="display:none">
+							<input type="text" name="starting-month" placeholder="To be developed">
+						</td>
+						<!--FORM d.c. - i.h.-->
+						<td id="form" style="display:none">
+							<textarea rows="1" cols="30">Type in Form array here</textarea>
+						</td>
+						<!---->
+
+						<td id="add">
+							<input type='button' value="Add" onClick=cloneRow();>
+						</td>
+
+						<td id="del">
+							<input type='button' value="Delete" disabled="true" onClick=deleteRow(this);>
+						</td>
+					</tr> 
+				</table>
+				<input id="submit" type='button' value="Submit" onClick=submit_but();>
+			</form>
+		</div>
+
+		<script >
+
+
+		function submit_but(){
+			alert('Create JSON file?');
+		}
+
+		function cloneRow()
+		{
+			var row = document.getElementById("rowToClone"); // find row to copy
+			var table = document.getElementById("tableToModify"); // find table to append to
+			document.getElementById('add').style.display = 'none'; //remove add button from copied row
+			var clone = row.cloneNode(true); // copy children too
+			clone.id = "newID"; // change id or other attributes/contents
+			document.getElementById('add').style.display = 'inline'; //return add btn
+			
+			
+			addDelBtn(clone);
+			table.appendChild(clone); // add new row to end of table
+			resetFields(row);
+			makeReadOnly(clone);
+		}
+
+		function resetFields(row){
+			console.log(row.cells.length);
+		for (var i=0; i<row.cells.length-2; i++) { //-2 in order to avoid button labels disappearance
+				row.cells[i].children[0].value = '';  // CLEAR FIELDS
+			}
+		}
+		
+		function makeReadOnly(clone){
+			for (var i=0; i<clone.cells.length-1; i++) { //to avoid disappearance of del btn
+				clone.cells[i].children[0].disabled = true; // MAKE READONLY //make uneditable already filled row
+			}
+		}
+		
+		function addDelBtn(clone){
+			var rowlength = clone.cells.length;
+			clone.cells[clone.cells.length-1].children[0].disabled = false;
+		}
+		
+		function deleteRow(element){
+			var td = element.parentNode; //find parent cell
+			tr = td.parentNode; //find parent row
+			tbl = tr.parentNode; //find parent table
+			var index = tr.rowIndex;
+			tbl.deleteRow(index); //delete row with element
+		}
+		
+		
+		function selectClickChange() {
+			<!--hide irrelevant fields when reselected-->	
+			document.getElementById('check_rad1').style.display = 'none';
+			document.getElementById('check_rad2').style.display = 'none';
+			document.getElementById('time').style.display = 'none';
+			document.getElementById('date').style.display = 'none';
+			document.getElementById('calendar').style.display = 'none';
+			document.getElementById('devel').style.display = 'none';
+			document.getElementById('form').style.display = 'none';
+
+			if(document.getElementById('formselect').value=='text-field'){
+				document.getElementById('text1').style.display = 'inline';
+				document.getElementById('text2').style.display= 'inline';
+			}else{
+				document.getElementById('text1').style.display = 'none';
+				document.getElementById('text2').style.display = 'none';
+				
+				if(document.getElementById('formselect').value=='check-box' 
+					|| document.getElementById('formselect').value=='radio-group'
+					||document.getElementById('formselect').value=='drop-down-list'){
+					document.getElementById('check_rad1').style.display = 'inline';
+				document.getElementById('check_rad2').style.display = 'inline';
+			}else if (document.getElementById('formselect').value=='time-picker'){
+				document.getElementById('time').style.display = 'inline';
+			}else if (document.getElementById('formselect').value=='date-picker'){
+				document.getElementById('date').style.display = 'inline';
+			}else if (document.getElementById('formselect').value=='calendar-date-picker'){
+				document.getElementById('calendar').style.display = 'inline';
+			}else if (document.getElementById('formselect').value=='signature-box'
+				|| document.getElementById('formselect').value=='pictures'){
+				document.getElementById('devel').style.display = 'inline';
+			}else document.getElementById('form').style.display = 'inline';
+		}	
+	}
+
+	</script>
+</body>
+</html>
+
