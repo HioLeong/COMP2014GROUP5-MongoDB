@@ -13,7 +13,6 @@
 			clone.style.display = 'table-row'
 			addDelBtn(clone);
 			table.appendChild(clone); // add new row to end of table
-			// makeReadOnly(clone);
 		}
 		
 		function makeReadOnly(clone){
@@ -38,43 +37,68 @@
 		
 		function selectClickChange(element) {
 
-			var parentElement = element.parentNode;
-			var dropDown = parentElement.getElementById('formselect');
+			// alert(element.parentNode.parentNode.id);
+
+			var parentRow = element.parentNode.parentNode;
+			var dropDown = element;
 			var selectedText = dropDown.options[dropDown.selectedIndex].text;
 
-			reset_fields();
+			reset_fields(parentRow);
 			
 			if (selectedText == 'Text-field') {
-				init_textfield_row();
+				init_textfield_row(parentRow);
 			} else if (selectedText == 'Checkbox group') {
-				init_checkgroup_row();
+				init_checkgroup_row(parentRow);
+			} else if (selectedText == 'Radio group') {
+				init_radiogroup_row(parentRow);
+			} else if (selectedText == 'Time picker') {
+				init_timepicker_row(parentRow);
+			} else if (selectedText == 'Date picker') {
+				init_datepicker_row(parentRow);
+			} else if (selectedText == 'Calendar Date picker') {
+				init_calendardatepicker_row(parentRow);
 			}
 
 		}	
 
-
-		function reset_fields() {
-			document.getElementById('text2').style.display = 'none';
-			document.getElementById('check_rad1').style.display = 'none';
-			document.getElementById('check_rad2').style.display = 'none';
-			document.getElementById('time').style.display = 'none';
-			document.getElementById('date').style.display = 'none';
-			document.getElementById('calendar').style.display = 'none';
-			document.getElementById('devel').style.display = 'none';
-			document.getElementById('form').style.display = 'none';
+		function reset_fields(row) {
+			row.getElementsByClassName('text-type').item(0).style.display = 'none';
+			row.getElementsByClassName('default-text').item(0).style.display = 'none';
+			row.getElementsByClassName('group-options-1').item(0).style.display = 'none';
+			row.getElementsByClassName('group-options-2').item(0).style.display = 'none';
+			row.getElementsByClassName('time-picker').item(0).style.display = 'none';
+			row.getElementsByClassName('date-picker').item(0).style.display = 'none';
+			row.getElementsByClassName('calendar-date-picker').item(0).style.display = 'none';
+			row.getElementsByClassName('dev').item(0).style.display = 'none';
+			row.getElementsByClassName('form-array').item(0).style.display = 'none';
 		}
 
-		function init_textfield_row() {
-			document.getElementById('text1').style.display = 'table-cell';
-			document.getElementById('text2').style.display= 'table-cell';
+		function init_textfield_row(row) {
+			row.getElementsByClassName('text-type').item(0).style.display = 'table-cell';
+			row.getElementsByClassName('default-text').item(0).style.display = 'table-cell';
 		}
 
-		function init_checkgroup_row() {
-			document.getElementById('check_rad1').style.display = 'table-cell';
-			document.getElementById('check_rad2').style.display = 'table-cell';
+		function init_checkgroup_row(row) {
+			row.getElementsByClassName('group-options-1').item(0).style.display = 'table-cell';
+			row.getElementsByClassName('group-options-2').item(0).style.display = 'table-cell';
 		}
 
-		function init_radiogroup_row() {
-			document.getElementById('check_rad1').style.display = 'table-cell';
-			document.getElementById('check_rad2').style.display = 'table-cell';
+		function init_radiogroup_row(row) {
+			row.getElementsByClassName('group-options-1').item(0).style.display = 'table-cell';
+			row.getElementsByClassName('group-options-2').item(0).style.display = 'table-cell';
+		}
+
+		function init_timepicker_row(row) {
+			row.getElementsByClassName('time-picker').item(0).style.display = 'table-cell';
+		}
+
+		function init_datepicker_row(row) {
+			row.getElementsByClassName('date-picker').item(0).style.display='table-cell';
+		}
+
+		function init_calendardatepicker_row(row) {
+			row.getElementsByClassName('calendar-date-picker').item(0).style.display = 'table-cell';
+		}
+
+		function init_dropdown_row(row) {
 		}
