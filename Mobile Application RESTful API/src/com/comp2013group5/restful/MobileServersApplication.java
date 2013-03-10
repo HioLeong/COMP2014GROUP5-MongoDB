@@ -1,18 +1,10 @@
 package com.comp2013group5.restful;
 
-import java.util.concurrent.ConcurrentHashMap;
-import java.util.concurrent.ConcurrentMap;
-
-import org.json.JSONObject;
 import org.restlet.Application;
 import org.restlet.Restlet;
 import org.restlet.routing.Router;
 
-import com.comp2014.group5.form_database.FormAccessor;
-
 public class MobileServersApplication extends Application {
-
-	private ConcurrentMap<String, JSONObject> items = new ConcurrentHashMap<String, JSONObject>();
 
 	public MobileServersApplication() {
 		this.setName("Mobile Server Application");
@@ -29,7 +21,4 @@ public class MobileServersApplication extends Application {
 		return router;
 	}
 
-	public ConcurrentMap<String, JSONObject> getItems() {
-		return items;
-	}
 }

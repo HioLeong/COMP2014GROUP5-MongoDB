@@ -15,13 +15,14 @@ public class FormResource extends BaseResource {
 
 	@Override
 	public void doInit() {
+		formName = (String) getRequestAttributes().get("formName");
+		formAccessor = new FormAccessor(IP_STRING);
+		
 	}
 
 	@Get
 	public String getForm() {
-		formAccessor = new FormAccessor("localhost");
-		return formAccessor.getFormNames().get(0);
-		
+		return formAccessor.getFormString(formName);
 	}
 
 }
