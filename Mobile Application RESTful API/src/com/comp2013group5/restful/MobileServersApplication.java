@@ -5,6 +5,8 @@ import org.restlet.Restlet;
 import org.restlet.routing.Router;
 
 public class MobileServersApplication extends Application {
+	
+	public final static String IP_STRING = "localhost";
 
 	public MobileServersApplication() {
 		this.setName("Mobile Server Application");
@@ -15,9 +17,11 @@ public class MobileServersApplication extends Application {
 
 		Router router = new Router(getContext());
 
-		router.attach("/form/", FormsResource.class);
-		router.attach("/forms/{formName}/", FormResource.class);
-
+		router.attach("/forms", FormsResource.class);
+		router.attach("/forms/{formName}", FormResource.class);
+		router.attach("/patients/",PatientsResource.class);
+		router.attach("/patients/{patientId}/week/{weekNum}/",PatientResource.class);
+		
 		return router;
 	}
 

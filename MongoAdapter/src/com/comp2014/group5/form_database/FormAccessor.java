@@ -59,7 +59,19 @@ public class FormAccessor {
 	public String getFormString(String formName) {
 		DBObject query = new BasicDBObject();
 		query.put("name", formName);
-		return formCollection.getDBCollection().find(query).next().toString();
+		if (formCollection.getDBCollection().find(query).hasNext()) {
+			return formCollection.getDBCollection().find(query).next()
+					.toString();
+		} else {
+			return "Invalid Search";
+		}
 	}
 
+	public static void main(String[] args) {
+		FormAccessor formAccessor = new FormAccessor("localhost");
+		for (String formName : formAccessor.getFormNames()) {
+			System.out.println(formName);
+		}
+		 System.out.print(formAccessor.getFormString("NST"));
+	}
 }
