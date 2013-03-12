@@ -1,0 +1,15 @@
+{
+    "nst": {
+        "hospital-number":null,
+        "date":null,
+        "time":null,
+        "weight":null,
+        "height":null,
+        "appeitite":null,
+        "neurological":null,
+        "physical-appearence":null,
+        "weight-loss":null,
+        "intake":null,
+        "total-score":null
+    }
+}
