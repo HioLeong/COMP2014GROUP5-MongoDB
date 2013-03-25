@@ -8,8 +8,10 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import com.comp2013group5.form.model.Form;
+import com.comp2014.group5.patient_database.PatientAccessor;
 import com.comp2014group5.generic_database.Collection;
 import com.comp2014group5.generic_database.FormDatabaseMongoImpl;
+import com.comp2014group5.model.nhs.Patient;
 import com.mongodb.BasicDBObject;
 import com.mongodb.DBCursor;
 import com.mongodb.DBObject;
@@ -42,6 +44,10 @@ public class FormAccessor {
 
 		}
 	}
+	
+	public void saveFormFromJSONObject(JSONObject formJSONObject) {
+		formCollection.saveRecordFromJSONObject(formJSONObject);
+	}
 
 	public List<String> getFormNames() {
 		List<String> formNames = new ArrayList<String>();
@@ -58,7 +64,7 @@ public class FormAccessor {
 
 	public String getFormString(String formName) {
 		DBObject query = new BasicDBObject();
-		query.put("name", formName);
+		query.put("patient", formName);
 		if (formCollection.getDBCollection().find(query).hasNext()) {
 			return formCollection.getDBCollection().find(query).next()
 					.toString();
@@ -68,10 +74,10 @@ public class FormAccessor {
 	}
 
 	public static void main(String[] args) {
-		FormAccessor formAccessor = new FormAccessor("localhost");
-		for (String formName : formAccessor.getFormNames()) {
-			System.out.println(formName);
+		PatientAccessor accessor = new PatientAccessor("localhost");
+		Patient patient = accessor.getPatientDetail("00000000");
+		if (patient != null) {
+			System.out.println(patient.getName());
 		}
-		 System.out.print(formAccessor.getFormString("NST"));
 	}
 }

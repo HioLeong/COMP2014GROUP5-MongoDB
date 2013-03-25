@@ -5,23 +5,26 @@ import org.restlet.resource.Get;
 
 import com.comp2014.group5.patient_database.PatientAccessor;
 
-public class PatientResource extends BaseResource {
+public class NSTResource extends BaseResource {
 
 	private static final String DB_IP = "localhost";
 
-	private String hospitalNumber;
-	private PatientAccessor accessor;
+	public String hospitalNumber;
+	public int weekNumber;
+	public PatientAccessor accessor;
 
 	@Override
 	public void doInit() {
 		accessor = new PatientAccessor(DB_IP);
 		hospitalNumber = (String) getRequestAttributes().get("hospitalNumber");
+		weekNumber = Integer.valueOf((String) getRequestAttributes().get(
+				"weekNumber"));
 	}
 
 	@Get
-	public String getPatientDetails() {
+	public String getNST() {
 		try {
-			return accessor.getPatientDetail(hospitalNumber).toJSONObject()
+			return accessor.getNST(hospitalNumber, weekNumber).toJSONObject()
 					.toString();
 		} catch (JSONException e) {
 			return null;
