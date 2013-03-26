@@ -2,8 +2,9 @@
 <html>
 <title>Form Creator</title>
 <head>
-<link href="css/bootstrap.min.css" rel="stylesheet" media="screen">
-<link href="css/formgenerator.css" rel="stylesheet" media="screen>">
+<base href="${pageContext.request.contextPath}">
+<link href="web/css/bootstrap.min.css" rel="stylesheet" media="screen">
+<link href="web/css/formgenerator.css" rel="stylesheet" media="screen>">
 </head>
 <body>
 	<!-- Nav Bar -->
@@ -19,11 +20,11 @@
 				</ul>
 			</div>
 		</div>
-		<form method="post" action="">
+		<form method=post action="form_added">
 			<div class="span10">
 				<ul class="inline">
 					<label>Form Name:</label>
-					<input type="text" class="input-small" placeholder="">
+					<input type="text" class="input-small" name="form-name" placeholder="">
 				</ul>
 			</div>
 
@@ -111,11 +112,18 @@
 					</tr>
 				</table>
 			</div>
+			<div class="span10 offset6">
+				<button onClick=removeClonedRow()>Submit</button>
+			</div>
 		</form>
 	</div>
-	<script type="text/javascript" src="formlib.js"> </script>
+	<script type="text/javascript" src="web/formlib.js"> </script>
 	<script type="text/javascript">
 		window.onload = init();
+		function removeClonedRow() {
+			var rowToClone = document.getElementById("rowToClone");
+			rowToClone.parentNode.removeChild(rowToClone);
+		}
 		</script>
 </body>
 </html>
