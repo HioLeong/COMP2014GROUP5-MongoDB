@@ -2,9 +2,12 @@
 <html>
 <title>Form Creator</title>
 <head>
-<base href="${pageContext.request.contextPath}">
-<link href="web/css/bootstrap.min.css" rel="stylesheet" media="screen">
-<link href="web/css/formgenerator.css" rel="stylesheet" media="screen>">
+<link
+	href="${pageContext.request.contextPath}/web/css/bootstrap.min.css"
+	rel="stylesheet" media="screen">
+<link
+	href="${pageContext.request.contextPath}/web/css/formgenerator.css"
+	rel="stylesheet" media="screen>">
 </head>
 <body>
 	<!-- Nav Bar -->
@@ -20,11 +23,13 @@
 				</ul>
 			</div>
 		</div>
-		<form method=post action="form_added">
+		<form method=get
+			action="${pageContext.request.contextPath}/form_added">
 			<div class="span10">
 				<ul class="inline">
 					<label>Form Name:</label>
-					<input type="text" class="input-small" name="form-name" placeholder="">
+					<input type="text" class="input-small" name="form-name"
+						placeholder="">
 				</ul>
 			</div>
 
@@ -45,7 +50,7 @@
 						<th><select id="formselect" name="fcomponent"
 							onChange=selectClickChange(this);>
 								<option value="text-field">Text-field</option>
-								<option value="check-box">Checkbox group</option>
+								<option value="check-group">Checkbox group</option>
 								<option value="radio-group">Radio group</option>
 								<option value="time-picker">Time picker</option>
 								<option value="date-picker">Date picker</option>
@@ -59,8 +64,8 @@
 						<th><input type="text" name="id"></th>
 						<th><input type="text" name="name"></th>
 
-						<th class="text-type" id="text1"><select name="type">
-								<option value="" disabled selected>Type</option>
+						<th class="input-type" id="text1"><select name="input-type">
+								<option value="undefined">Type</option>
 								<option value="string">String</option>
 								<option value="int">Integer</option>
 								<option value="real">Real</option>
@@ -117,13 +122,14 @@
 			</div>
 		</form>
 	</div>
-	<script type="text/javascript" src="web/formlib.js"> </script>
+	<script type="text/javascript"
+		src="${pageContext.request.contextPath}/web/formlib.js"> </script>
 	<script type="text/javascript">
 		window.onload = init();
 		function removeClonedRow() {
 			var rowToClone = document.getElementById("rowToClone");
 			rowToClone.parentNode.removeChild(rowToClone);
 		}
-		</script>
+	</script>
 </body>
 </html>

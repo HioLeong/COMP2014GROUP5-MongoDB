@@ -36,9 +36,6 @@
 		
 		
 		function selectClickChange(element) {
-
-			// alert(element.parentNode.parentNode.id);
-
 			var parentRow = element.parentNode.parentNode;
 			var dropDown = element;
 			var selectedText = dropDown.options[dropDown.selectedIndex].text;
@@ -62,7 +59,7 @@
 		}	
 
 		function reset_fields(row) {
-			row.getElementsByClassName('text-type').item(0).style.display = 'none';
+			row.getElementsByClassName('input-type').item(0).style.display = 'none';
 			row.getElementsByClassName('default-text').item(0).style.display = 'none';
 			row.getElementsByClassName('group-options-1').item(0).style.display = 'none';
 			row.getElementsByClassName('group-options-2').item(0).style.display = 'none';
@@ -74,7 +71,7 @@
 		}
 
 		function init_textfield_row(row) {
-			row.getElementsByClassName('text-type').item(0).style.display = 'table-cell';
+			row.getElementsByClassName('input-type').item(0).style.display = 'table-cell';
 			row.getElementsByClassName('default-text').item(0).style.display = 'table-cell';
 		}
 
