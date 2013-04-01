@@ -1,11 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
+
 <%@ page
 	import="java.io.*,java.util.*,com.comp2014.group5.webservices.FormParameterHandler,org.json.*,com.comp2013group5.form.model.*,com.comp2014.group5.form_database.FormAccessor"%>
 
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+
 <!DOCTYPE html>
 <html>
-<title>Form Added Process</title>
+<title>Form List</title>
 <head>
 <link
 	href="${pageContext.request.contextPath}/web/css/bootstrap.min.css"
@@ -28,32 +31,30 @@
 				</ul>
 			</div>
 		</div>
-
-
-		<%
-			String queryString = request.getQueryString();
-			FormParameterHandler handler = new FormParameterHandler(queryString);
-			Form form = handler.getForm();
-
-			FormAccessor accessor = new FormAccessor("localhost");
-			
-			try {
-				accessor.saveForm(form);
-			} catch (Exception e) {
-				out.println("Error connecting to the database");
-			}
-		%>
-
 	</div>
 
 	<div class="container-fluid">
-		<h1>Form Added</h1>
-		<a href="/">Continue</a>
+
+		<%
+			FormAccessor accessor;
+			accessor = new FormAccessor("localhost");
+		%>
+		<ol>
+			<%
+				for (String name : accessor.getFormNames()) {
+			%>
+			<li><a href="edit_form/<%=name%>"> <%
+ 	out.println(name);
+ %>
+			</a></li>
+			<%
+				}
+			%>
+		</ol>
 	</div>
 	<script type="text/javascript"
 		src="${pageContext.request.contextPath}/web/formlib.js">
 		
 	</script>
-
 </body>
 </html>

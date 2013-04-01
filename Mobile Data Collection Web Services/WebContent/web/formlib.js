@@ -54,6 +54,8 @@
 				init_datepicker_row(parentRow);
 			} else if (selectedText == 'Calendar Date picker') {
 				init_calendardatepicker_row(parentRow);
+			} else if (selectedText == 'Drop-down list') {
+				init_dropdownlist_row(parentRow);
 			}
 
 		}	
@@ -70,32 +72,90 @@
 			row.getElementsByClassName('form-array').item(0).style.display = 'none';
 		}
 
-		function init_textfield_row(row) {
-			row.getElementsByClassName('input-type').item(0).style.display = 'table-cell';
-			row.getElementsByClassName('default-text').item(0).style.display = 'table-cell';
+		function init_textfield_row(row, input_type, default_text) {
+
+			var inputType = row.getElementsByClassName('input-type').item(0);
+			var defaultText = row.getElementsByClassName('default-text').item(0);
+
+			inputType.style.display = 'table-cell';
+			defaultText.style.display = 'table-cell';
+
+			if (typeof(input_type) == 'undefined') input_type = 'text-field';
+			if (typeof(default_text) == 'undefined') default_text = 'undefined';
+
+			inputType.getElementsByTagName('select').item(0).value = input_type;
+
+			for(var i, j = 0; i = inputType.getElementsByTagName('select').item(0).options[j]; j++) {
+				if(i.value == input_type) {
+					inputType.getElementsByTagName('select').item(0).selectedIndex = j;
+					break;
+				}
+			}
+
+
+			defaultText.getElementsByTagName('input').value = default_text;
+
 		}
 
-		function init_checkgroup_row(row) {
-			row.getElementsByClassName('group-options-1').item(0).style.display = 'table-cell';
-			row.getElementsByClassName('group-options-2').item(0).style.display = 'table-cell';
+		function init_checkgroup_row(row, group_items, group_index) {
+
+			var groupItems = row.getElementsByClassName('group-options-1').item(0);
+			var groupIndex = row.getElementsByClassName('group-options-2').item(0);
+
+			groupItems.style.display = 'table-cell';
+			groupIndex.style.display = 'table-cell';
+
+			if (typeof(group_items) == 'undefined') group_items = '';
+			if (typeof(group_index) == 'undefined') group_index = '';
+
+			groupItems.getElementsByTagName('input').item(0).value = group_items;
+			groupIndex.getElementsByTagName('input').item(0).value = group_index;
+
 		}
 
-		function init_radiogroup_row(row) {
-			row.getElementsByClassName('group-options-1').item(0).style.display = 'table-cell';
-			row.getElementsByClassName('group-options-2').item(0).style.display = 'table-cell';
+		function init_radiogroup_row(row,group_items, group_index) {
+			var groupItems = row.getElementsByClassName('group-options-1').item(0);
+			var groupIndex = row.getElementsByClassName('group-options-2').item(0);
+
+			groupItems.style.display = 'table-cell';
+			groupIndex.style.display = 'table-cell';
+
+			if (typeof(group_items) == 'undefined') group_items = '';
+			if (typeof(group_index) == 'undefined') group_index = '';
+
+			groupItems.getElementsByTagName('input').item(0).value = group_items;
+			groupIndex.getElementsByTagName('input').item(0).value = group_index;
 		}
 
-		function init_timepicker_row(row) {
-			row.getElementsByClassName('time-picker').item(0).style.display = 'table-cell';
+		function init_timepicker_row(row, starting_time) {
+
+			var timePicker = row.getElementsByClassName('time-picker').item(0);
+
+			timePicker.style.display = 'table-cell';
+
+			if (typeof(starting_time) == 'undefined') starting_time = '';
+
+			timePicker.getElementsByTagName('input').item(0).value = starting_time; 
+
 		}
 
-		function init_datepicker_row(row) {
-			row.getElementsByClassName('date-picker').item(0).style.display='table-cell';
+		function init_datepicker_row(row, starting_date) {
+
+			var datePicker = row.getElementsByClassName('date-picker').item(0);
+
+			datePicker.style.display = 'table-cell';
+
+			if (typeof(starting_date) == 'undefined') starting_date = '';
+
+			datePicker.getElementsByTagName('input').item(0).value = starting_date; 
+
 		}
 
 		function init_calendardatepicker_row(row) {
 			row.getElementsByClassName('calendar-date-picker').item(0).style.display = 'table-cell';
 		}
 
-		function init_dropdown_row(row) {
+		function init_dropdownlist_row(row) {
+			row.getElementsByClassName('group-options-1').item(0).style.display = 'table-cell';
+			row.getElementsByClassName('group-options-2').item(0).style.display = 'table-cell';
 		}

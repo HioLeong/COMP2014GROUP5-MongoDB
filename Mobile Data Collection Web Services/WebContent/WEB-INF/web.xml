@@ -1,22 +1,48 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" xmlns:web="http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd" version="3.0">
-  <display-name>Mobile Data Collection Web Services</display-name>
-  
-  <servlet>
-      <servlet-name>form-creation</servlet-name>
-      <jsp-file>/web/form_new.jsp</jsp-file>
-  </servlet>
-  <servlet-mapping>
-      <servlet-name>form-creation</servlet-name>
-      <url-pattern>/new_form/</url-pattern>
-  </servlet-mapping>
-  
-  <servlet>
-      <servlet-name>form-added</servlet-name>
-      <jsp-file>/web/add_form.jsp</jsp-file>
-  </servlet>
-  <servlet-mapping>
-      <servlet-name>form-added</servlet-name>
-      <url-pattern>/form_added</url-pattern>
-  </servlet-mapping>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns="http://java.sun.com/xml/ns/javaee" xmlns:web="http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"
+	version="3.0">
+	<display-name>Mobile Data Collection Web Services</display-name>
+
+	<servlet>
+		<servlet-name>form-creation</servlet-name>
+		<jsp-file>/web/form_new.jsp</jsp-file>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>form-creation</servlet-name>
+		<url-pattern>/new_form/</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>form-added</servlet-name>
+		<jsp-file>/web/add_form.jsp</jsp-file>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>form-added</servlet-name>
+		<url-pattern>/form_added</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>form-list</servlet-name>
+		<jsp-file>/web/form_list.jsp</jsp-file>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>form-list</servlet-name>
+		<url-pattern>/form_list</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>edit-form</servlet-name>
+		<jsp-file>/web/edit_form.jsp</jsp-file>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>edit-form</servlet-name>
+		<url-pattern>/edit_form/*</url-pattern>
+	</servlet-mapping>
+
+	<error-page>
+	    <error-code>404</error-code>
+		<location>/web/error.jsp</location>
+	</error-page>
 </web-app>

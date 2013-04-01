@@ -7,19 +7,18 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-public class RadioGroup extends FormWidget {
+public class DropDown extends FormWidget {
 
 	private List<String> options;
 
-	public RadioGroup() {
+	public DropDown() {
 
 	}
 
-	public RadioGroup(JSONObject jsonWrapperObj) {
+	public DropDown(JSONObject jsonWrapperObj) {
+
 		try {
-
-			JSONObject jsonObj = jsonWrapperObj.getJSONObject("radio-group");
-
+			JSONObject jsonObj = jsonWrapperObj.getJSONObject("drop-down");
 			setId((String) jsonObj.get("id"));
 			setName((String) jsonObj.get("name"));
 
@@ -34,6 +33,22 @@ public class RadioGroup extends FormWidget {
 		}
 	}
 
+	@Override
+	public JSONObject toJSONObject() throws JSONException {
+		JSONObject wrapperObject = new JSONObject();
+		wrapperObject.put("drop-down", getJSONContent());
+		return wrapperObject;
+
+	}
+
+	public JSONObject getJSONContent() throws JSONException {
+		JSONObject content = new JSONObject();
+		content.put("id", getId());
+		content.put("name", getName());
+		content.put("options", getOptions());
+		return content;
+	}
+
 	public List<String> getOptions() {
 		return options;
 	}
@@ -42,24 +57,4 @@ public class RadioGroup extends FormWidget {
 		this.options = options;
 	}
 
-	@Override
-	public JSONObject toJSONObject() throws JSONException {
-
-		JSONObject out = new JSONObject();
-
-		out.put("radio-group", getJSONContent());
-
-		return out;
-	}
-
-	private JSONObject getJSONContent() throws JSONException {
-
-		JSONObject content = new JSONObject();
-
-		content.put("id", getId());
-		content.put("name", getName());
-		content.put("options", options);
-
-		return content;
-	}
 }

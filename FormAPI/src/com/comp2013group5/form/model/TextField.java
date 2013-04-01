@@ -13,6 +13,23 @@ public class TextField extends FormWidget {
 	private String inputType;
 	private String defaultText;
 
+	public TextField() {
+
+	}
+
+	public TextField(JSONObject jsonWrapperObj) {
+		
+		try {
+			JSONObject jsonObj= jsonWrapperObj.getJSONObject("text-field");
+			setId((String) jsonObj.get("id"));
+			setName((String) jsonObj.get("name"));
+			setInputType((String) jsonObj.get("input-type"));
+			setDefaultText((String) jsonObj.getString("default-text"));
+		} catch (JSONException e) {
+			e.printStackTrace();
+		}
+	}
+
 	public String getInputType() {
 		return inputType;
 	}
@@ -51,15 +68,4 @@ public class TextField extends FormWidget {
 		this.defaultText = defaultText;
 	}
 
-	public static void main(String[] args) {
-		TextField text = new TextField();
-		text.setId("id");
-		text.setInputType("inputType");
-		try {
-			System.out.println(text.toJSONObject().toString());
-		} catch (JSONException e) {
-			e.printStackTrace();
-		}
-	}
-	
 }

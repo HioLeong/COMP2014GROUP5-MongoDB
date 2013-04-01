@@ -64,7 +64,7 @@ public class FormAccessor {
 
 	public String getFormString(String formName) {
 		DBObject query = new BasicDBObject();
-		query.put("patient", formName);
+		query.put("name", formName);
 		if (formCollection.getDBCollection().find(query).hasNext()) {
 			return formCollection.getDBCollection().find(query).next()
 					.toString();
@@ -74,10 +74,5 @@ public class FormAccessor {
 	}
 
 	public static void main(String[] args) {
-		PatientAccessor accessor = new PatientAccessor("localhost");
-		Patient patient = accessor.getPatientDetail("00000000");
-		if (patient != null) {
-			System.out.println(patient.getName());
-		}
 	}
 }

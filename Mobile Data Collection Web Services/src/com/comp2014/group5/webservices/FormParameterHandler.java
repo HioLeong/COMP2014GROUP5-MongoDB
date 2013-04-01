@@ -7,7 +7,11 @@ import java.util.List;
 import java.util.StringTokenizer;
 
 import com.comp2013group5.form.model.CheckGroup;
+import com.comp2013group5.form.model.DatePicker;
+import com.comp2013group5.form.model.DropDown;
+import com.comp2013group5.form.model.Form;
 import com.comp2013group5.form.model.FormWidget;
+import com.comp2013group5.form.model.RadioGroup;
 import com.comp2013group5.form.model.TextField;
 
 public class FormParameterHandler {
@@ -22,6 +26,22 @@ public class FormParameterHandler {
 		} catch (UnsupportedEncodingException e) {
 			e.printStackTrace();
 		}
+	}
+
+	public Form getForm() {
+		Form form = new Form();
+		StringTokenizer tokenizer = new StringTokenizer(queryString, "&");
+		while (tokenizer.hasMoreTokens()) {
+			String nextToken = tokenizer.nextToken();
+			if (nextToken.contains("form-name")) {
+				form.setName(getSingleValue(nextToken));	
+			}
+		}
+
+		for (FormWidget widget : getFormComponents()) {
+			form.addFormWidget(widget);
+		}
+		return form;
 	}
 
 	public List<FormWidget> getFormComponents() {
@@ -44,9 +64,40 @@ public class FormParameterHandler {
 		if (type.contains("check-group")) {
 			return getCheckGroup(tokenizer);
 		}
-		
-		// If no types matcheds
+		if (type.contains("radio-group")) {
+			return getRadioGroup(tokenizer);
+		}
+
+		if (type.contains("date-picker")) {
+			return getDatePicker(tokenizer);
+		}
+
+		if (type.contains("drop-down")) {
+			return getDropDown(tokenizer);
+		}
 		return null;
+	}
+
+	private FormWidget getDatePicker(StringTokenizer tokenizer) {
+		DatePicker datePicker = new DatePicker();
+		for (int i = 0; i < NUMBER_OF_PARAMETERS; i++) {
+
+			String nextToken = tokenizer.nextToken();
+
+			if (nextToken.contains("id")) {
+				datePicker.setId(getSingleValue(nextToken));
+			}
+
+			if (nextToken.contains("name")) {
+				datePicker.setName(getSingleValue(nextToken));
+			}
+
+			if (nextToken.contains("starting-date")) {
+				datePicker.setStartDate(getSingleValue(nextToken));
+			}
+		}
+
+		return datePicker;
 	}
 
 	private TextField getTextField(StringTokenizer tokenizer) {
@@ -94,6 +145,48 @@ public class FormParameterHandler {
 		return checkGroup;
 	}
 
+	private RadioGroup getRadioGroup(StringTokenizer tokenizer) {
+		RadioGroup radioGroup = new RadioGroup();
+		for (int i = 0; i < NUMBER_OF_PARAMETERS; i++) {
+
+			String nextToken = tokenizer.nextToken();
+
+			if (nextToken.contains("id")) {
+				radioGroup.setId(getSingleValue(nextToken));
+			}
+			if (nextToken.contains("name")) {
+				radioGroup.setName(getSingleValue(nextToken));
+			}
+			if (nextToken.contains("options")) {
+				radioGroup.setOptions(getListValues(nextToken));
+			}
+
+		}
+
+		return radioGroup;
+	}
+
+	private DropDown getDropDown(StringTokenizer tokenizer) {
+		DropDown dropDown = new DropDown();
+		for (int i = 0; i < NUMBER_OF_PARAMETERS; i++) {
+			String nextToken = tokenizer.nextToken();
+
+			if (nextToken.contains("id")) {
+				dropDown.setId(getSingleValue(nextToken));
+			}
+
+			if (nextToken.contains("name")) {
+				dropDown.setName(getSingleValue(nextToken));
+			}
+
+			if (nextToken.contains("options")) {
+				dropDown.setOptions(getListValues(nextToken));
+			}
+
+		}
+		return dropDown;
+	}
+
 	private String getSingleValue(String statement) {
 		int valueIndex = statement.indexOf("=") + 1;
 		return statement.substring(valueIndex);
@@ -111,5 +204,5 @@ public class FormParameterHandler {
 
 		return values;
 	}
-	
+
 }
