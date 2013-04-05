@@ -22,10 +22,10 @@ public class FormAccessor {
 	private final static String FORM_COLLECTION = "forms";
 
 	private Collection formCollection;
+	private MongoClient mongoClient;
 
 	public FormAccessor(String ip) {
 
-		MongoClient mongoClient;
 		try {
 			mongoClient = new MongoClient(ip);
 			FormDatabaseMongoImpl fDb = new FormDatabaseMongoImpl(mongoClient);
@@ -72,7 +72,9 @@ public class FormAccessor {
 			return "Invalid Search";
 		}
 	}
-
-	public static void main(String[] args) {
+	
+	public void closeConnection() {
+		mongoClient.close();
 	}
+
 }

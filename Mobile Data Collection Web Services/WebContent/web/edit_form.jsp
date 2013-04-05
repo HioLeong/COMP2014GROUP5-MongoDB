@@ -9,6 +9,10 @@
 <!DOCTYPE html>
 <html>
 <title>Form Creator</title>
+
+<script type="text/javascript"
+	src="${pageContext.request.contextPath}/web/formlib.js"> </script>
+
 <head>
 <link
 	href="${pageContext.request.contextPath}/web/css/bootstrap.min.css"
@@ -19,29 +23,12 @@
 </head>
 <body>
 
+	<!-- Nav Bar -->
+
 	<%
 		String url = request.getRequestURI();
-		String formName = url.substring(url.lastIndexOf('/') + 1);
+			String formName = url.substring(url.lastIndexOf('/') + 1);
 	%>
-
-	<%
-		Form form;
-		try {
-			FormAccessor accessor = new FormAccessor("localhost");
-			String formString = accessor.getFormString(formName);
-			
-	%>
-	<script type="text/javascript">
-		window.onload = init(); </script>
-	<%
-		} catch (Exception e) {
-	%>
-	<h1>Error connecting to the database.</h1>
-	<%
-		}
-	%>
-
-	<!-- Nav Bar -->
 
 	<div class="container-fluid">
 		<div class="navbar">
@@ -78,7 +65,7 @@
 					</tr>
 
 					<tr class="form-row" id="rowToClone" style="display: none">
-						<th><select id="formselect" name="fcomponent"
+						<th class="formselect"><select id="formselect" name="fcomponent"
 							onChange=selectClickChange(this);>
 								<option value="text-field">Text-field</option>
 								<option value="check-group">Checkbox group</option>
@@ -92,14 +79,13 @@
 								<option value="pictures">Pictures</option>
 								<option value="form">Form</option>
 						</select></th>
-						<th><input type="text" name="id"></th>
-						<th><input type="text" name="name"></th>
+						<th class="id"><input type="text" name="id"></th>
+						<th class="name"><input type="text" name="name"></th>
 
 						<th class="input-type" id="text1"><select name="input-type">
 								<option value="undefined">Type</option>
-								<option value="string">String</option>
-								<option value="int">Integer</option>
-								<option value="real">Real</option>
+								<option value="text">Text</option>
+								<option value="number">Number</option>
 								<option value="email">Email</option>
 								<option value="phone_num">Phone number</option>
 						</select></th>
@@ -152,11 +138,64 @@
 
 				<button onClick=removeClonedRow()>Submit</button>
 			</div>
+
+			<%
+				Form form = null;
+					try {
+
+						FormAccessor accessor = new FormAccessor("localhost");
+						String formString = accessor.getFormString(formName);
+						form = new Form(new JSONObject(formString));
+			%>
+			<%
+				} catch (Exception e) {
+			%>
+			<h1>Error connecting to the database.</h1>
+			<%
+				}
+			%>
+
+			<%
+				for (FormWidget formWidget : form.getFormWidgets()) {
+				// Can't believe I'm using instanceof	
+				
+					if (formWidget instanceof TextField) {
+						TextField textField = (TextField) formWidget;
+			%>
+			<script type="text/javascript"> addRow('text-field','<%=textField.getId()%>', '<%=textField.getName()%>', '<%=textField.getInputType()%>', '<%=textField.getDefaultText()%>'); </script>
+			<%
+					}
+					if (formWidget instanceof CheckGroup) {
+						CheckGroup checkGroup = (CheckGroup) formWidget;
+						String optionsString =checkGroup.getOptions().toString();
+						optionsString = optionsString.substring(1,optionsString.length()-1);
+						optionsString = optionsString.replace(", ", ",");
+			%>
+			<script type="text/javascript">addRow('check-group','<%=checkGroup.getId()%>','<%=checkGroup.getName()%>','<%= optionsString%>');</script>			
+							
+					<%
+					}
+					if (formWidget instanceof RadioGroup) {
+						RadioGroup radioGroup = (RadioGroup) formWidget;
+						String optionsString = radioGroup.getOptions().toString();
+						optionsString = optionsString.substring(1, optionsString.length()-1);
+						optionsString = optionsString.replace(", ", ",");
+					%> 
+						<script type="text/javascript">addRow('radio-group','<%=radioGroup.getId()%>','<%=radioGroup.getName()%>','<%= optionsString%>');</script>
+					<%
+					}
+					if (formWidget instanceof DatePicker) {
+						DatePicker datePicker = (DatePicker) formWidget;
+					%> 
+					<script type="text/javascript"> addRow('date-picker','<%=datePicker.getId()%>', '<%=datePicker.getName()%>', '<%=datePicker.getStartDate() %>'); </script>						
+						<%
+					}
+					
+				}
+			%>
+
 		</form>
 	</div>
-	<script type="text/javascript"
-		src="${pageContext.request.contextPath}/web/formlib.js"> </script>
-
 
 	<script type="text/javascript">
 		function removeClonedRow() {

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="txtView1">Enter name of form:</string>
+    <string name="app_name">Medical Form Application</string>
+    <string name="btnClick">Create form</string>
+
+    <!-- Menu items -->
+    <string name="menu_help">Help</string>
+    <string name="menu_settings">Settings</string>
+
+    <!-- Preference page settings -->
+    <string name="setting_connection_title">Connection</string>
+    <string name="setting_connection_summary">Information to get the App connected</string>
+    <string name="setting_root_address_title">Root Address</string>
+    <string name="setting_root_address_summary">Enter the root URL where the forms are stored.</string>
+
+</resources>

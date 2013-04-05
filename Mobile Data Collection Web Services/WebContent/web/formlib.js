@@ -10,11 +10,55 @@
 			var clone = row.cloneNode(true); // copy children too
 			clone.id = "row_"+rows++; // change id or other attributes/contents
 			document.getElementById('add').style.display = 'table-cell'; //return add btn
-			clone.style.display = 'table-row'
+			clone.style.display = 'table-row';
 			addDelBtn(clone);
 			table.appendChild(clone); // add new row to end of table
 		}
-		
+
+		function addRow(type, id, name, first_field, second_field) {
+			var row = document.getElementById("rowToClone");
+			var table = document.getElementById("tableToModify");
+			var clone = row.cloneNode(true);
+
+			clone.id = id;
+
+			document.getElementById('add').style.display = 'table-cell'; //return add btn
+			clone.style.display = 'table-row';
+
+			table.appendChild(clone);
+			addDelBtn(clone);
+
+			clone.getElementsByClassName('id').item(0).getElementsByTagName('input').item(0).value = id;
+			clone.getElementsByClassName('name').item(0).getElementsByTagName('input').item(0).value = name;
+
+			reset_fields(clone);
+
+			var selector = clone.getElementsByClassName('formselect').item(0).getElementsByTagName('select').item(0);
+
+			if (type == 'text-field') {
+				set_selector(selector,'text-field');
+				init_textfield_row(clone, first_field, second_field);
+			}
+			if (type == 'check-group') {
+				set_selector(selector,'check-group');
+				init_checkgroup_row(clone, first_field, second_field);
+			}
+			if (type == 'radio-group') {
+				set_selector(selector,'radio-group');
+				init_radiogroup_row(clone, first_field, second_field);
+			}
+			if (type == 'drop-down') {
+				set_selector(selector,'drop-down');
+				init_dropdownlist_row(clone, first_field, second_field);
+			}
+			if (type == 'date-picker') {
+				set_selector(selector,'date-picker');
+				init_datepicker_row(clone,first_field);
+			}
+
+		}
+
+
 		function makeReadOnly(clone){
 			for (var i=0; i<clone.cells.length-1; i++) { //to avoid disappearance of del btn
 				clone.cells[i].children[0].disabled = true; // MAKE READONLY //make uneditable already filled row
@@ -41,9 +85,10 @@
 			var selectedText = dropDown.options[dropDown.selectedIndex].text;
 
 			reset_fields(parentRow);
-			
+
+
 			if (selectedText == 'Text-field') {
-				init_textfield_row(parentRow);
+				init_textfield_row(parentRow,'string','text');
 			} else if (selectedText == 'Checkbox group') {
 				init_checkgroup_row(parentRow);
 			} else if (selectedText == 'Radio group') {
@@ -54,7 +99,7 @@
 				init_datepicker_row(parentRow);
 			} else if (selectedText == 'Calendar Date picker') {
 				init_calendardatepicker_row(parentRow);
-			} else if (selectedText == 'Drop-down list') {
+			} else if (selectedText == 'Drop-down list','dropDown') {
 				init_dropdownlist_row(parentRow);
 			}
 
@@ -91,9 +136,7 @@
 					break;
 				}
 			}
-
-
-			defaultText.getElementsByTagName('input').value = default_text;
+			defaultText.getElementsByTagName('input').item(0).value = default_text;
 
 		}
 
@@ -158,4 +201,13 @@
 		function init_dropdownlist_row(row) {
 			row.getElementsByClassName('group-options-1').item(0).style.display = 'table-cell';
 			row.getElementsByClassName('group-options-2').item(0).style.display = 'table-cell';
+		}
+
+		function set_selector(selector, item) {
+			for(var i, j = 0; i = selector.options[j]; j++) {
+				if(i.value == item) {
+					selector.selectedIndex = j;
+					break;
+				}
+			}
 		}

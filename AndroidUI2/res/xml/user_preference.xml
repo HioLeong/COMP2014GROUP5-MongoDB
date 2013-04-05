@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android" >
+
+    <PreferenceCategory
+        android:summary="@string/setting_connection_summary"
+        android:title="@string/setting_connection_title" >
+        <EditTextPreference
+            android:key="root_address"
+            android:summary="@string/setting_root_address_summary"
+            android:title="@string/setting_root_address_title" />
+    </PreferenceCategory>
+
+</PreferenceScreen>
