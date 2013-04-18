@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.json.JSONException;
+import org.json.JSONObject;
 
 import com.comp2014group5.generic_database.Collection;
 import com.comp2014group5.generic_database.FormDatabaseMongoImpl;
@@ -43,6 +44,10 @@ public class PatientAccessor {
 
 	public void saveNST(NST nstForm) throws JSONException {
 		patientsCollection.saveRecordFromJSONObject(nstForm.toJSONObject());
+	}
+
+	public void saveNSTJSONObject(JSONObject jsonObj) {
+		patientsCollection.saveRecordFromJSONObject(jsonObj);
 	}
 
 	public List<String> getAllHospitalNumbers() {

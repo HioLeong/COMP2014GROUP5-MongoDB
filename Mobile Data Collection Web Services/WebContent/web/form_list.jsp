@@ -24,8 +24,8 @@
 			<div class="navbar-inner">
 				<a class="brand" href="#">Data Collector</a>
 				<ul class="nav">
-					<li class="active"><a href="#">Form Creator</a></li>
-					<li><a href="#">Form List</a></li>
+					<li><a href="${pageContext.request.contextPath}/new_form/">Form Creator</a></li>
+					<li class="active"><a href="#">Form List</a></li>
 					<li><a href="#">Data Analysis</a>
 					<li>
 				</ul>
@@ -39,7 +39,7 @@
 			FormAccessor accessor;
 			accessor = new FormAccessor("localhost");
 		%>
-		<ol>
+		<ul class="nav nav-pills nav-stacked">
 			<%
 				for (String name : accessor.getFormNames()) {
 			%>

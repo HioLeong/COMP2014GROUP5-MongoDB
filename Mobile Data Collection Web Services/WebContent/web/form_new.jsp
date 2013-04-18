@@ -17,7 +17,7 @@
 				<a class="brand" href="#">Data Collector</a>
 				<ul class="nav">
 					<li class="active"><a href="#">Form Creator</a></li>
-					<li><a href="#">Form List</a></li>
+					<li><a href="${pageContext.request.contextPath}/form_list">Form List</a></li>
 					<li><a href="#">Data Analysis</a>
 					<li>
 				</ul>
