@@ -11,15 +11,19 @@ public final class R {
     public static final class attr {
     }
     public static final class drawable {
-        public static final int ic_launcher=0x7f020000;
+        public static final int barcode=0x7f020000;
+        public static final int ic_launcher=0x7f020001;
+        public static final int nfc=0x7f020002;
     }
     public static final class id {
+        public static final int barcode_scanner=0x7f090009;
         public static final int buttonBarcode=0x7f090004;
         public static final int buttonForm=0x7f090002;
         public static final int buttonNFC=0x7f090003;
         public static final int formlist_row_text=0x7f090005;
         public static final int help=0x7f090008;
         public static final int menu_settings=0x7f090007;
+        public static final int nfc_scanner=0x7f09000a;
         public static final int scrForm=0x7f090006;
         public static final int textView1=0x7f090000;
         public static final int url=0x7f090001;
@@ -31,6 +35,8 @@ public final class R {
     }
     public static final class menu {
         public static final int activity_main=0x7f080000;
+        public static final int barcode=0x7f080001;
+        public static final int nfc=0x7f080002;
     }
     public static final class raw {
         public static final int example=0x7f050000;

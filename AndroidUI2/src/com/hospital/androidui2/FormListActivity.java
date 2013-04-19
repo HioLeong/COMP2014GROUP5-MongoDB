@@ -22,6 +22,7 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class FormListActivity extends ListActivity {
 
@@ -38,6 +39,7 @@ public class FormListActivity extends ListActivity {
 
 		formList = parse(downloadText(urlBuilder.toString()));
 		baseUrl = urlBuilder.toString() + "/";
+		
 
 		FormListArrayAdapter adapter = new FormListArrayAdapter(this,
 				R.layout.form_list_row, formList);
@@ -60,7 +62,6 @@ public class FormListActivity extends ListActivity {
 		char[] inputBuffer = new char[BUFFER_SIZE];
 		try {
 			while ((charRead = isr.read(inputBuffer)) > 0) {
-				// ---convert the chars to a String---
 				String readString = String
 						.copyValueOf(inputBuffer, 0, charRead);
 				str += readString;
@@ -108,7 +109,8 @@ public class FormListActivity extends ListActivity {
 
 	private List<String> parse(String s) {
 		List<String> list = new ArrayList<String>();
-		String listString = s.substring(1, s.length() - 1);
+		Toast.makeText(this, s, Toast.LENGTH_LONG).show();
+		String listString = s.substring(1, s.length()-1);
 		listString = listString.replace(", ", ",");
 		StringTokenizer stringTokenizer = new StringTokenizer(listString, ",");
 		while (stringTokenizer.hasMoreTokens()) {

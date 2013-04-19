@@ -11,7 +11,6 @@ public class PatientsResource extends BaseResource {
 
 	@Put("string")
 	public void getPatientWeeklyNST(String jsonString) {
-		System.out.println("Posted");
 		accessor = new PatientAccessor("localhost");
 		
 	}
