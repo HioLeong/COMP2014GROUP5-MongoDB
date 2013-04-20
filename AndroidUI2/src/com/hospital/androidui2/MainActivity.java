@@ -21,21 +21,19 @@ public class MainActivity extends Activity implements OnClickListener {
 		View formBtn = findViewById(R.id.buttonForm);
 		formBtn.setOnClickListener(this);
 
-		View NFCBtn = findViewById(R.id.buttonNFC);
-		NFCBtn.setOnClickListener(this);
-
-		View ScanBtn = findViewById(R.id.buttonBarcode);
-		ScanBtn.setOnClickListener(this);
 	}
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
+	    getMenuInflater().inflate(R.menu.activity_main, menu);
 		getMenuInflater().inflate(R.menu.nfc, menu);
-		getMenuInflater().inflate(R.menu.activity_main, menu);
+		
 		getMenuInflater().inflate(R.menu.barcode, menu);
 		return true;
 	}
-
+	
+	
+	
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 		switch (item.getItemId()) {
@@ -45,35 +43,37 @@ public class MainActivity extends Activity implements OnClickListener {
 			return true;
 		case R.id.help:
 			return true;
+		case R.id.barcode_scanner:
+		    Intent LaunchIntent = getPackageManager()
+			.getLaunchIntentForPackage("com.simonmacdonald.scan");
+		    startActivity(LaunchIntent);
+		    return true;
+		case R.id.nfc_scanner:
+		    Intent LaunchIntent2 = getPackageManager()
+			.getLaunchIntentForPackage("nfc.tag");
+		    startActivity(LaunchIntent2);
+		    return true;
 		default:
 			return false;
 		}
 	}
+	
 
 	@Override
 	public void onClick(View v) {
 		// TODO Auto-generated method stub
-		EditText et = (EditText) findViewById(R.id.url);
-		URL = et.getText().toString();
+		
+		//URL = et.getText().toString();
 		if (v.getId() == R.id.buttonForm) {
 			// define a new Intent for the second Activity
 
 			Intent intent = new Intent(this, FormListActivity.class);
-			intent.putExtra("URLKEY", URL);
+			//intent.putExtra("URLKEY", URL);
 
 			// start the second Activity
 			this.startActivity(intent);
 		}
-		if (v.getId() == R.id.buttonNFC) {
-			Intent LaunchIntent = getPackageManager()
-					.getLaunchIntentForPackage("nfc.tag");
-			startActivity(LaunchIntent);
-		}
-		if (v.getId() == R.id.buttonBarcode) {
-			Intent LaunchIntent = getPackageManager()
-					.getLaunchIntentForPackage("com.simonmacdonald.scan");
-			startActivity(LaunchIntent);
-		}
+		
 
 	}
 
