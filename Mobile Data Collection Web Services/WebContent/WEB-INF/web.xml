@@ -40,6 +40,15 @@
 		<servlet-name>edit-form</servlet-name>
 		<url-pattern>/edit_form/*</url-pattern>
 	</servlet-mapping>
+	
+	<servlet>
+	    <servlet-name>monitor</servlet-name>
+	    <jsp-file>/web/monitor.jsp</jsp-file>
+	</servlet>
+	<servlet-mapping>
+	    <servlet-name>monitor</servlet-name>
+	    <url-pattern>/monitor</url-pattern>
+	</servlet-mapping>
 
 	<error-page>
 	    <error-code>404</error-code>

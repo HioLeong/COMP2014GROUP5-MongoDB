@@ -17,7 +17,6 @@ public class MobileServersApplication extends Application {
 	public synchronized Restlet createInboundRoot() {
 
 		Router router = new Router(getContext());
-
 		router.attach("/forms", FormsResource.class);
 		router.attach("/forms/{formName}", FormResource.class);
 		router.attach("/forms/keys/{formName}", ValidKeyResource.class);

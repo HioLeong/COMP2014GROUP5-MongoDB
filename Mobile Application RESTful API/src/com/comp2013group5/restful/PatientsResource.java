@@ -12,7 +12,6 @@ public class PatientsResource extends BaseResource {
 	@Put("string")
 	public void getPatientWeeklyNST(String jsonString) {
 		accessor = new PatientAccessor("localhost");
-		
 	}
 
 }

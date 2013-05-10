@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="src" path="/Mobile Application RESTful API"/>
+	<classpathentry kind="lib" path="/Users/Home/Documents/workspace-cloned/COMP2014GROUP5-MongoDB/Mobile Application RESTful API/WebContent/WEB-INF/lib/formapi.jar"/>
+	<classpathentry kind="lib" path="/Users/Home/Documents/workspace-cloned/COMP2014GROUP5-MongoDB/Mobile Application RESTful API/WebContent/WEB-INF/lib/json.jar"/>
+	<classpathentry kind="lib" path="/Users/Home/Documents/workspace-cloned/COMP2014GROUP5-MongoDB/Mobile Application RESTful API/WebContent/WEB-INF/lib/mongo-2.10.1.jar"/>
+	<classpathentry kind="lib" path="/Users/Home/Documents/workspace-cloned/COMP2014GROUP5-MongoDB/Mobile Application RESTful API/WebContent/WEB-INF/lib/mongodbadapter.jar"/>
+	<classpathentry kind="lib" path="/Users/Home/Documents/workspace-cloned/COMP2014GROUP5-MongoDB/Mobile Application RESTful API/WebContent/WEB-INF/lib/org.restlet.ext.servlet.jar"/>
+	<classpathentry kind="lib" path="/Users/Home/Documents/workspace-cloned/COMP2014GROUP5-MongoDB/Mobile Application RESTful API/WebContent/WEB-INF/lib/org.restlet.ext.xml.jar"/>
+	<classpathentry kind="lib" path="/Users/Home/Documents/workspace-cloned/COMP2014GROUP5-MongoDB/Mobile Application RESTful API/WebContent/WEB-INF/lib/org.restlet.jar"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.6">
+		<attributes>
+			<attribute name="owner.project.facets" value="java"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/4"/>
+	<classpathentry kind="output" path="bin"/>
+</classpath>
